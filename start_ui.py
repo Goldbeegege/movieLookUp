@@ -6,7 +6,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from dytt import DyttSpider
+from dycollections import DyttSpider
 import threading
 import os
 
