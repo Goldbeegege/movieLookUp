@@ -16,7 +16,6 @@ class DyttSpiderUi(QMainWindow):
     def __init__(self,*args,**kwargs):
         super(DyttSpiderUi, self).__init__(*args,**kwargs)
         self.resize(800,400)
-        self.statusPid = 0
 
         self.topWidget = QWidget()
         self.topLayout = QHBoxLayout()
@@ -28,6 +27,7 @@ class DyttSpiderUi(QMainWindow):
         self.combox.addItems(["电影","电视剧","综艺","旧综艺","游戏","动漫"])
 
         self.btn = QPushButton("搜索")
+        self.btn.setStyleSheet("border-radius:4px;border:1px solid red;")
         self.btn.clicked.connect(self.get_start)
 
         self.label = QLabel("未开始查询...")
@@ -68,30 +68,11 @@ class DyttSpiderUi(QMainWindow):
         clipBoard = QApplication.clipboard()
         clipBoard.setText(item.text())
         self.status.showMessage("复制成功",3000)
-        if self.statusPid == 0:
-            path = os.path.join(os.path.expanduser("~"), "Desktop")
-            ret,_ = QFileDialog.getOpenFileName(self,"选择下载软件",path)
-            if ret and _:
-                t = threading.Thread(target=self.openThunder,args=(ret,))
-                t.start()
-
-    def openThunder(self,ret):
-        self.statusPid = 1
-        join_path = ret.rsplit("/",1)[0] + "\Thunder.exe"
-        path = '"{}" '.format(join_path)
-        status = os.system(path)
-        print(status)
-        if status == 0:
-            self.statusPid = status
-        '"D:\Program Files (x86)\Thunder9\Program\Thunder.exe" -StartType:DesktopIcon'
-        '"D:\Program Files (x86)\Thunder9\Program\ThunderStart.exe" -StartType:DesktopIcon'
-
-
 
 
     def callback(self,movie_list):
         if movie_list:
-            msg = "搜索结束！1页共{}个结果;双击电影名称即可复制到剪切板".format(len(movie_list))
+            msg = "搜索结果：1页共{}个结果;双击电影名称即可复制到剪切板，请先打开迅雷！".format(len(movie_list))
         else:
             msg = "搜索结束！未搜索到相关结果！"
         self.new_thread(msg)
