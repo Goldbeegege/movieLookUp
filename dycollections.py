@@ -22,6 +22,8 @@ class BaseSpider(object):
         self.page = None
         self.q = Queue()
         self.task = []
+        self.size = 0
+        self.count = 0
         self.header = {
             "User-Agent":"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36",
             "Content-Type":"application/x-www-form-urlencoded"
@@ -40,6 +42,7 @@ class BaseSpider(object):
     def handler_response(self,link_list):
         for link in link_list:
             self.q.put(link)
+        self.size = self.q.qsize()
         self.multi_task()
 
     def multi_task(self):
@@ -53,9 +56,6 @@ class BaseSpider(object):
             except Empty:
                 break
 
-    def job_done(self):
-        while True:
-            [t.isAlive() for t in self.task]
 
     def get_movie(self,link,callback):
         pass
@@ -63,6 +63,9 @@ class BaseSpider(object):
     def get_download_link(self,ret):
         pass
 
+    def job_done(self):
+        if self.count == min([self.size,self.task_mount]):
+            return True
 
 class DyttSpider(BaseSpider):
 
@@ -73,7 +76,7 @@ class DyttSpider(BaseSpider):
         link_list = html.xpath("//div[@class='co_content8']//table//td[2]/b/a/@href")
         if link_list:
             page_list = re.findall(r"<a href=['\"](.*)['\"]>\[\d+\]</a>", ret)
-            self.multi_task()
+            self.handler_response(link_list)
         else:
             self.func([])
         # if page_list and self.page is None:
@@ -90,7 +93,8 @@ class DyttSpider(BaseSpider):
         if len(res_list) == 0:
             res_list = re.findall(r"<a .*>(http.*)</a>", ret)
         self.movies.extend(res_list)
-        if callable(self.func):
+        self.count += 1
+        if self.job_done():
             self.func(self.movies)
             
 class SixvdySpider(BaseSpider):
@@ -125,7 +129,7 @@ class SixvdySpider(BaseSpider):
             self.multi_task()
         else:
             self.func([])
-
+            pass
     def get_movie(self,link,callback):
         response = self.send_request(
             "http://so.hao6v.com" + link,
@@ -138,12 +142,15 @@ class SixvdySpider(BaseSpider):
     def get_download_link(self,ret):
         html = etree.HTML(ret.decode("gbk"))
         link_list = html.xpath("//table[1]//a")
+        links = []
         for link in link_list:
             if self.keyword in link.text:
                 movie = "[{}]  ".format(link.text) + link.xpath("./@href")[0]
-                self.movies.append(movie)
-        self.func([])
-
+                links.append(movie)
+        self.movies.extend(links)
+        self.count += 1
+        if self.job_done():
+            self.func(self.movies)
 
                         
     def get_movie_type(self,type_title):
@@ -158,4 +165,3 @@ class SixvdySpider(BaseSpider):
 if __name__ == '__main__':
     dy = SixvdySpider("蜘蛛侠","电影&3D",0)
     dy.start_request()
-    print(dy.movies)

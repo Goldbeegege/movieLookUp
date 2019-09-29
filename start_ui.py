@@ -15,6 +15,35 @@ import os
 class DyttSpiderUi(QMainWindow):
     def __init__(self,*args,**kwargs):
         super(DyttSpiderUi, self).__init__(*args,**kwargs)
+        self.originMap = {
+            0: DyttSpider,
+            1: SixvdySpider
+        }
+
+        self.typeMap = {
+            DyttSpider: {
+                0: "1",
+                1: "2",
+                2: "99",
+                3: "89",
+                4: "19",
+                5: "16"
+            },
+            SixvdySpider: {
+                0: "电影&3D",
+                1: "国产剧",
+                2: "日剧",
+                3: "韩剧",
+                4: "美剧",
+                5: "欧剧"
+            }
+        }
+
+        self.movie_type = {
+            0:["电影", "电视剧", "综艺", "旧综艺  ", "游戏", "动漫"],
+            1:["电影&3D", "国产剧", "日剧", "韩剧", "美剧", "欧剧"]
+        }
+
         self.resize(800,400)
 
         self.topWidget = QWidget()
@@ -23,21 +52,28 @@ class DyttSpiderUi(QMainWindow):
         self.lineEdit = QLineEdit()
         self.lineEdit.setPlaceholderText("请输入关键词...")
 
-        self.combox = QComboBox()
-        self.combox.addItems(["电影","电视剧","综艺","旧综艺","游戏","动漫"])
 
-        self.btn = QPushButton("搜索")
-        self.btn.setStyleSheet("border-radius:4px;border:1px solid red;")
+        self.combox1 = QComboBox()
+        self.combox1.addItems(["电影天堂","6v"])
+        self.combox1.setToolTip("请选择片源")
+        self.combox1.currentIndexChanged.connect(self.change_origin)
+
+        self.combox2 = QComboBox()
+        self.combox2.addItems(self.movie_type[0])
+        self.combox2.setToolTip("请选择类型")
+
+        self.btn = QPushButton("搜 索")
+        self.btn.setStyleSheet("color:blue;font-weight:bold")
         self.btn.clicked.connect(self.get_start)
 
         self.label = QLabel("未开始查询...")
         self.label.setStyleSheet("color:blue;font-weight:bold")
         self.qlist = QListWidget()
-        # self.qlist.addItems(["hah","111"])
         self.qlist.itemDoubleClicked.connect(self.down_load)
 
         self.topLayout.addWidget(self.lineEdit)
-        self.topLayout.addWidget(self.combox)
+        self.topLayout.addWidget(self.combox1)
+        self.topLayout.addWidget(self.combox2)
         self.topLayout.addWidget(self.btn)
         self.topWidget.setLayout(self.topLayout)
 
@@ -53,19 +89,11 @@ class DyttSpiderUi(QMainWindow):
         self.centerWidget.setLayout(self.centerLayout)
         self.setCentralWidget(self.centerWidget)
 
-        self.typeMap = {
-            0:"1",
-            1:"2",
-            2:"99",
-            3:"89",
-            4:"19",
-            5:"16"
-        }
-        self.spider = None
+    def change_origin(self,index):
+        self.combox2.clear()
+        self.combox2.addItems(self.movie_type[index])
 
     def down_load(self,item):
-        print(item.text())
-
         clipBoard = QApplication.clipboard()
         clipBoard.setText(item.text())
         self.status.showMessage("复制成功",3000)
@@ -77,7 +105,7 @@ class DyttSpiderUi(QMainWindow):
         else:
             msg = "搜索结束！未搜索到相关结果！"
         self.new_thread(msg)
-        t = threading.Thread(target=self.insertValue,args=(self.spider.movies,))
+        t = threading.Thread(target=self.insertValue,args=(movie_list,))
         t.start()
 
 
@@ -101,18 +129,18 @@ class DyttSpiderUi(QMainWindow):
 
     def get_start(self):
         keyword = self.lineEdit.text()
-        print(keyword)
+        origin = self.combox1.currentIndex()
+        origin_type = self.originMap[origin]
         if keyword:
             self.new_thread("开始搜索请稍后...")
-            # index = self.combox.currentIndex()
-            # type_id = self.typeMap[index]
-            # spider = DyttSpider(keyword,type_id,self.callback)
-            t = threading.Thread(target=self.start_request,args=(keyword,"电影&3D",self.callback))
+            index = self.combox2.currentIndex()
+            type_id = self.typeMap[origin_type].get(index)
+            t = threading.Thread(target=self.start_request,args=(keyword,type_id,origin_type,self.callback))
             t.start()
 
-    def start_request(self,keyword,type_id,callback):
-        self.spider = SixvdySpider(keyword, type_id, callback)
-        self.spider.start_request()
+    def start_request(self,keyword,type_id,origin,callback):
+        spider = origin(keyword, type_id, callback)
+        spider.start_request()
 
     def new_thread(self,msg):
         t1 = threading.Thread(target=self.log_msg, args=(msg,))
