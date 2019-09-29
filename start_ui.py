@@ -6,7 +6,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-from dycollections import DyttSpider
+from dycollections import DyttSpider,SixvdySpider
 import threading
 import os
 
@@ -61,6 +61,7 @@ class DyttSpiderUi(QMainWindow):
             4:"19",
             5:"16"
         }
+        self.spider = None
 
     def down_load(self,item):
         print(item.text())
@@ -76,7 +77,7 @@ class DyttSpiderUi(QMainWindow):
         else:
             msg = "搜索结束！未搜索到相关结果！"
         self.new_thread(msg)
-        t = threading.Thread(target=self.insertValue,args=(movie_list,))
+        t = threading.Thread(target=self.insertValue,args=(self.spider.movies,))
         t.start()
 
 
@@ -100,12 +101,18 @@ class DyttSpiderUi(QMainWindow):
 
     def get_start(self):
         keyword = self.lineEdit.text()
+        print(keyword)
         if keyword:
             self.new_thread("开始搜索请稍后...")
-            index = self.combox.currentIndex()
-            type_id = self.typeMap[index]
-            spider = DyttSpider(keyword,type_id,self.callback)
-            spider.start_request()
+            # index = self.combox.currentIndex()
+            # type_id = self.typeMap[index]
+            # spider = DyttSpider(keyword,type_id,self.callback)
+            t = threading.Thread(target=self.start_request,args=(keyword,"电影&3D",self.callback))
+            t.start()
+
+    def start_request(self,keyword,type_id,callback):
+        self.spider = SixvdySpider(keyword, type_id, callback)
+        self.spider.start_request()
 
     def new_thread(self,msg):
         t1 = threading.Thread(target=self.log_msg, args=(msg,))
