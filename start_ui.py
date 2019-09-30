@@ -40,7 +40,7 @@ class DyttSpiderUi(QMainWindow):
         }
 
         self.movie_type = {
-            0:["电影", "电视剧", "综艺", "旧综艺  ", "游戏", "动漫"],
+            0:["电影", "电视剧", "综艺", "旧综艺    ", "游戏", "动漫"],
             1:["电影&3D", "国产剧", "日剧", "韩剧", "美剧", "欧剧"]
         }
 
@@ -64,7 +64,7 @@ class DyttSpiderUi(QMainWindow):
 
         self.btn = QPushButton("搜 索")
         self.btn.setStyleSheet("color:blue;font-weight:bold")
-        self.btn.clicked.connect(self.get_start)
+        self.btn.clicked.connect(self.dispatch)
 
         self.label = QLabel("未开始查询...")
         self.label.setStyleSheet("color:blue;font-weight:bold")
@@ -120,23 +120,23 @@ class DyttSpiderUi(QMainWindow):
     def dispatch(self):
         keyword = self.lineEdit.text()
         if keyword:
+            print("ok")
             t1 = threading.Thread(target=self.log_msg, args=("开始搜索请稍后...",))
-            t1.setDaemon(True)
             t1.start()
             t2 = threading.Thread(target=self.get_start,args=(keyword,))
             t2.start()
 
 
-    def get_start(self):
-        keyword = self.lineEdit.text()
+    def get_start(self,keyword):
         origin = self.combox1.currentIndex()
         origin_type = self.originMap[origin]
-        if keyword:
-            self.new_thread("开始搜索请稍后...")
-            index = self.combox2.currentIndex()
-            type_id = self.typeMap[origin_type].get(index)
-            t = threading.Thread(target=self.start_request,args=(keyword,type_id,origin_type,self.callback))
-            t.start()
+        index = self.combox2.currentIndex()
+        type_id = self.typeMap[origin_type].get(index)
+        spider = origin_type(keyword, type_id, self.callback)
+        spider.start_request()
+
+        # t2 = threading.Thread(target=self.start_request,args=(keyword,type_id,origin_type,self.callback))
+        # t2.start()
 
     def start_request(self,keyword,type_id,origin,callback):
         spider = origin(keyword, type_id, callback)

@@ -24,6 +24,7 @@ class BaseSpider(object):
         self.task = []
         self.size = 0
         self.count = 0
+        self.movie_style = ["mvk","rmvb","rm","mp4","avi"]
         self.header = {
             "User-Agent":"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36",
             "Content-Type":"application/x-www-form-urlencoded"
@@ -126,6 +127,7 @@ class SixvdySpider(BaseSpider):
                             movie = movie.xpath("./font")[0]
                         if self.keyword in movie.text:
                             self.q.put(href)
+            self.size = self.q.qsize()
             self.multi_task()
         else:
             self.func([])
@@ -144,7 +146,7 @@ class SixvdySpider(BaseSpider):
         link_list = html.xpath("//table[1]//a")
         links = []
         for link in link_list:
-            if self.keyword in link.text:
+            if self.get_movie_link(link.text):
                 movie = "[{}]  ".format(link.text) + link.xpath("./@href")[0]
                 links.append(movie)
         self.movies.extend(links)
@@ -152,6 +154,13 @@ class SixvdySpider(BaseSpider):
         if self.job_done():
             self.func(self.movies)
 
+    def get_movie_link(self,text):
+        if self.keyword in text:
+            return True
+        parts = text.split(".")
+        ret = re.findall("^\d[0-9]$",parts[0])
+        if ret and parts[-1].lower() in self.movie_style:
+            return True
                         
     def get_movie_type(self,type_title):
         type_list = self.type_id.split("&")
