@@ -16,8 +16,8 @@ class DyttSpiderUi(QMainWindow):
     def __init__(self,*args,**kwargs):
         super(DyttSpiderUi, self).__init__(*args,**kwargs)
         self.originMap = {
-            0: DyttSpider,
-            1: SixvdySpider
+            1: DyttSpider,
+            0: SixvdySpider
         }
 
         self.typeMap = {
@@ -34,14 +34,13 @@ class DyttSpiderUi(QMainWindow):
                 1: "国产剧",
                 2: "日剧",
                 3: "韩剧",
-                4: "美剧",
-                5: "欧剧"
+                4: "美剧&欧剧"
             }
         }
 
         self.movie_type = {
-            0:["电影", "电视剧", "综艺", "旧综艺  ", "游戏", "动漫"],
-            1:["电影&3D", "国产剧", "日剧", "韩剧", "美剧", "欧剧"]
+            1:["电影", "电视剧", "综艺", "旧综艺  ", "游戏", "动漫"],
+            0:["电影&3D", "国产剧", "日剧", "韩剧", "美剧&欧剧"]
         }
 
         self.resize(800,400)
@@ -54,7 +53,7 @@ class DyttSpiderUi(QMainWindow):
 
 
         self.combox1 = QComboBox()
-        self.combox1.addItems(["电影天堂","6v"])
+        self.combox1.addItems(["6v电影","电影天堂"])
         self.combox1.setToolTip("请选择片源")
         self.combox1.currentIndexChanged.connect(self.change_origin)
 
