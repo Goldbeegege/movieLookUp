@@ -1132,7 +1132,183 @@ onload="this.height=0;var fdh=(this.Document?this.Document.body.scrollHeight:thi
 #     print(link)
 #     print(link.text.encode("utf-8").decode("gbk"))
 
-aa = requests.get("http://s.ygdy8.com/plus/so.php?typeid=1&keyword=%D6%A9%D6%EB%CF%C0").content
-print(aa)
+h = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>高级搜索 神探夏洛克 - 66影视 - 迅雷电影下载_在线电影</title>
+<meta name="keywords" content="高级搜索 神探夏洛克 - 66影视 - 迅雷电影下载_在线电影" />
+<meta name="description" content="高级搜索 神探夏洛克 - 66影视 - 迅雷电影下载_在线电影" />
+<link rel="stylesheet" rev="stylesheet" href="/images/style.css" type="text/css" />
+<script type="text/javascript" src="/js/common.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+</head>
+<body>
+	<div id="header"><div id="top">  <a href="https://app.pp63.org/快看.apk" target=_blank>APP安卓版</a>&nbsp;&nbsp;
+<a href="http://www.hao6v.com/dy/2012-12-07/19512.html" target=_blank>公告区</a>&nbsp;&nbsp;<a href="http://www.hao6v.com/dy/2019-01-02/32524.html" target="_blank">豆瓣2018榜单</a>&nbsp;&nbsp;
+<a href="http://www.hao6v.com/gq/2012-09-01/18841.html" target=_blank><font color='#FF0000'>6v电影排行榜</font></a>&nbsp;&nbsp;
+<a href="http://www.hao6v.com/dy/2011-09-20/16090.html" target=_blank>北美票房排行榜</a>&nbsp;&nbsp;
+<a href="http://www.hao6v.com/s/007/" target=_blank>007电影全集</a>&nbsp;&nbsp;
+<a href="http://www.hao6v.com/s/gf250/" target=_blank>IMDB250电影</a>&nbsp;&nbsp;
+<a href="/s/gf/" target=_blank>高评分电影</a>&nbsp;&nbsp;
+<a href="/s/hanguodianying/" target=_blank>美国电影</a>&nbsp;&nbsp;<a href="/s/xijudianying/" target=_blank>欧洲电影</a>&nbsp;&nbsp;<a href="/s/yazhoudianying/" target=_blank>亚洲电影</a>&nbsp;&nbsp;<a href="/s/mzdy/" target=_blank>美洲电影</a> &nbsp;<a href="http://www.hao6v.com/e/tool/gbook/?bid=1" target=_blank>访客留言</a></div>
+    	<div class="log"><a href="/">6V电影</a></div>
+        <div class="topad"><script src="/d/f4.js"></script></div>
+<div class="cr"></div>
+        <div id="menu">
+      <p><a href="http://www.hao6v.com/">首页</a>  <a href="http://www.hao6v.com/dy/" target=_blank>2019最新电影</a> <a href="http://www.hao6v.com/gydy/" target=_blank>国语配音电影</a> <a href="http://www.hao6v.com/zydy/" target=_blank>微电影</a> <a href="http://www.hao6v.com/gq/" target=_blank>经典高清电影</a> <a href="http://www.hao6v.com/jddy/" target=_blank>动画电影</a> <a href="http://www.hao6v.com/3D/" target=_blank>3D电影</a> <a href="http://www.hao6v.com/s/shoujiMP4dianying/" target=_blank>MP4手机电影</a> <a href="http://www.hao6v.com/dlz/" target=_blank>国剧</a> <a href="http://www.hao6v.com/rj/" target=_blank>日韩剧</a> <a href="http://www.hao6v.com/mj/" target=_blank>欧美剧</a> <a href="http://www.hao6v.com/zy/" target=_blank>综艺节目</a> <a href="http://www.hao6v.com/s/gangtaidianying/" target=_blank>港台电影</a> <a href="http://www.hao6v.com/s/jingdiandianying/" target=_blank>日韩电影</a> </p>
+      <p class="bg"><a href="http://www.66e.cc/" target=_blank>66影视网</a> 专题分类：<a href="http://www.hao6v.com/s/xiju/" target=_blank>喜剧</a><a href="http://www.hao6v.com/s/dongzuo/" target=_blank>动作</a><a href="http://www.hao6v.com/s/aiqing/" target=_blank>爱情</a><a href="http://www.hao6v.com/s/kehuan/" target=_blank>科幻</a><a href="http://www.hao6v.com/s/qihuan/" target=_blank>奇幻</a><a href="http://www.hao6v.com/s/shenmi/" target=_blank>神秘</a><a href="http://www.hao6v.com/s/huanxiang/" target=_blank>幻想</a><a href="http://www.hao6v.com/s/kongbu/" target=_blank>恐怖</a><a href="http://www.hao6v.com/s/zhanzheng/" target=_blank>战争</a><a href="http://www.hao6v.com/s/maoxian/" target=_blank>冒险</a><a href="http://www.hao6v.com/s/jingsong/" target=_blank>惊悚</a><a href="http://www.hao6v.com/s/juqingpian/" target=_blank>剧情</a><a href="http://www.hao6v.com/s/zhuanji/" target=_blank>传记</a><a href="http://www.hao6v.com/s/lishi/" target=_blank>历史</a><a href="http://www.hao6v.com/s/jilu/" target=_blank>纪录</a><a href="http://www.hao6v.com/s/yindudianying/" target=_blank>印度电影</a>  <a href="http://www.hao6v.com/s/guochandianying/" target=_blank>国产电影</a> <a href="http://www.hao6v.com/s/xijudianying/" target=_blank>欧洲电影</a> <a href="http://www.hao6v.com/s/zhuanti/" target=_blank>专题推荐</a> </p>
+        </div>
+  </div>
 
+<div id="a960"> <script src="/d/f1.js"></script> </div>
+<div id="search">
+<div class="ser">
+<form action="/e/search/index.php" method="post" name="searchform" id="searchform">
+<input type="hidden" name="show" value="title,smalltext" />
+<input type="hidden" name="tempid" value="1" />
+
+<span>站内搜索：<input name="keyboard" type="text" size="32" id="keyboard" class="inputText" /></span>
+<span class="sect"><select name="tbname">
+<option value="article">全站</option>
+</select></span>
+<span><input type="image" class="inputSub" src="/images/search.gif" /></span>
+</form>
+</span>
+</div>
+<div class="help">
+<a href="http://www.hao6v.com/dy/2010-10-11/12868.html" target="_blank">6v电影下载帮助与教程<br />电影知识新手必看</a>
+</div>
+<INPUT type="button" value='收藏本影片' id="copy" onclick="javascript:d=document;window.external.AddFavorite(''+d.location.href+'', ''+d.title+'')">
+<div class="help">
+
+<!-- Baidu Button BEGIN -->
+    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+        <span class="bds_more">分享到：</span>
+        <a class="bds_qzone"></a>
+        <a class="bds_tsina"></a>
+        <a class="bds_tqq"></a>
+        <a class="bds_renren"></a>
+        <a class="bds_baidu"></a>
+        <a class="bds_copy"></a>
+        <a class="bds_qq"></a>
+    </div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=267792" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?t=" + new Date().getHours();
+</script>
+<!-- Baidu Button END -->
+</div>
+</div>
+
+<div id="main">
+<div class="box">
+        	<div class="t">您的位置：<a href='/index.html'>首页</a>&nbsp;>&nbsp;高级搜索</div>
+ <tr> 
+                                        <td height="100%" valign="top"> <form name=search_news method=post action='http://www.hao6v.com/e/search/index.php' onsubmit='return search_check(document.search_news);'>
+                        <table width="100%" border="0" cellspacing="1" cellpadding="3">
+                          <input type=hidden name=show value="title">
+						  <input type=hidden name=tempid value="1">
+                          <tr> 
+                            <td height="20">关键字： 
+                              <input name="keyboard" type="text" id="keyboard" value="国语配音" size="32">
+                              <select name="tbname" id="tbname">
+                                <option value="article">迅雷资源</option>
+                              </select> 
+                              <input type="submit" name="Submit22" value="搜索"> 
+                              &nbsp; 
+                                     </td>
+                              &nbsp; <input type="button" name="Submit" value="高级搜索" onclick="self.location.href='../../../search'">
+                              (多个关键字请用&quot;空格&quot;格开) </td>
+                          </tr>
+                        </table>
+                      </form>
+                      <table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="E8F5FB">
+                        <tr> 
+                          <td height="25">系统搜索到约有<strong>2</strong>项符合<strong>神探夏洛克</strong>的查询结果</td>
+                        </tr>
+                      </table>
+                       
+                      <table width="100%" border="0" align="center" cellpadding="3" cellspacing="1">
+        <tr> 
+          <td><div align="center">
+			  <table width="99%" border="0" align="center" cellpadding="3" cellspacing="1">
+                <tr> 
+                  
+            <td width="41%" height="25"><font color="#663333">・[<a href=/dy/>2019最新电影</a>]<span class="blue14"><a href=/dy/2016-01-02/STXLT.html target=_blank>2016剧情《神探夏洛克》720p.国英双语.BD中英双字</a></span></font></td>
+                  <td width="59%"><font color="#666666">发布时间：2016-04-03 13:25:16</font></td>
+                </tr>
+              </table>
+            </div></td>
+        </tr>
+        <tr> 
+          <td bgcolor="#EBF3FA"> 
+            <table width="98%" border="0" align="center" cellpadding="3" cellspacing="1">
+              <tr> 
+                <td>◎译　　名　神探夏洛克/新世纪福尔摩斯(台)/神探夏洛克：恶劣的新娘/神探夏洛克：可恶的新娘/神探夏洛克剧场版/神探夏洛克：2016新年特别篇<br />
+◎片　　名　Sherlock: The Abominable Bride<br />
+◎年</td>
+              </tr>
+              <tr>
+                <td><a href="/dy/2016-01-02/STXLT.html" target="_blank">/dy/2016-01-02/STXLT.html</a></td>
+              </tr>
+            </table>
+			</td>
+        </tr>
+      </table>
+                       
+                      <table width="100%" border="0" align="center" cellpadding="3" cellspacing="1">
+        <tr> 
+          <td><div align="center">
+			  <table width="99%" border="0" align="center" cellpadding="3" cellspacing="1">
+                <tr> 
+                  
+            <td width="41%" height="25"><font color="#663333">・[<a href=/mj/>欧剧.美剧连载</a>]<span class="blue14"><a href=/mj/2012-01-04/17099.html target=_blank>英剧《神探夏洛克/新福尔摩斯》第三季[更新03/高清03]</a></span></font></td>
+                  <td width="59%"><font color="#666666">发布时间：2014-01-13 22:07:33</font></td>
+                </tr>
+              </table>
+            </div></td>
+        </tr>
+        <tr> 
+          <td bgcolor="#EBF3FA"> 
+            <table width="98%" border="0" align="center" cellpadding="3" cellspacing="1">
+              <tr> 
+                <td> <br />
+<br />
+【片名】神探夏洛克 第二季/Sherlock S2<br />
+【电视台】：英国BBC1<br />
+【首播时间】：2009年（本季首播：2012年1月1日）<br />
+【类型】罪案/迷你剧<br />
+【影片长度】90分钟*3集<br />
+【海报制作】subaru444</td>
+              </tr>
+              <tr>
+                <td><a href="/mj/2012-01-04/17099.html" target="_blank">/mj/2012-01-04/17099.html</a></td>
+              </tr>
+            </table>
+			</td>
+        </tr>
+      </table>
+                       </td>
+                  </tr>
+                  <tr> 
+                    <td height="100%" valign="top"> <div align="center"></div></td>
+                  </tr>
+                  <tr> 
+                    <td height="12" valign="top"></td>
+                  </tr>  
+</div>
+</div>
+
+<div id="footer">
+	<p class="t"><a href="/index.html">网站留言</a> - <a href="/index.html">关于我们</a> - <a href="/index.html">广告业务</a> - <a href="/index.html">信息反馈</a> - <a href="/index.html">合作伙伴</a> - <a href="/index.html">网站地图</a></p>
+	<p>Copyright &copy; 2009 <a href="http://www.hao6v.com"><b><font color=red>6VHAO</font>.COM</b></a> 版权所有<br />
+	  渝ICP备09051310号
+</div>
+<span class="hidden"><script src=/d/tj.js></script></span>"""
+
+html = etree.HTML(h)
+root_list = html.xpath("//div[@id='main']//table//td[1]/text()")
+print(root_list)
 

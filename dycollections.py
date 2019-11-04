@@ -119,6 +119,7 @@ class SixvdySpider(BaseSpider):
             },
             headers = self.header
         ).text
+        print(ret)
         self.get_response(ret)
         
     def get_response(self,s):
@@ -130,10 +131,7 @@ class SixvdySpider(BaseSpider):
                     movie_list = mov.xpath("../span/a")
                     for index,movie in enumerate(movie_list):
                         href = movie.xpath("./@href")[0]
-                        if movie.text is None:
-                            movie = movie.xpath(".//font")[0]
-                        if self.keyword in movie.text:
-                            self.q.put(href)
+                        self.q.put(href)
             self.size = self.q.qsize()
             self.multi_task()
         else:
@@ -168,9 +166,8 @@ class SixvdySpider(BaseSpider):
     def get_link_name(self,text):
         if self.keyword in text:
             return True
-        parts = text.split(".")
-        ret = re.findall(r"^\d.*",parts[0])
-        if ret and parts[-1].lower() in self.movie_type:
+        parts = text.rsplit(".",1)
+        if parts[-1] in self.movie_type:
             return True
                         
     def get_movie_type(self,type_title):
