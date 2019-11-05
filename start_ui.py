@@ -4,11 +4,8 @@
 
 import sys 
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
 from dycollections import DyttSpider,SixvdySpider
 import threading
-import os
 
 
 
@@ -32,18 +29,16 @@ class DyttSpiderUi(QMainWindow):
             SixvdySpider: {
                 0: "电影&3D",
                 1: "国产剧",
-                2: "日剧",
-                3: "韩剧",
-                4: "美剧&欧剧"
+                2: "日剧&韩剧",
+                3: "美剧&欧剧"
             }
         }
 
         self.movie_type = {
             1:["电影", "电视剧", "综艺", "旧综艺  ", "游戏", "动漫"],
-            0:["电影&3D", "国产剧", "日剧", "韩剧", "美剧&欧剧"]
+            0:["电影&3D", "国产剧", "日剧&韩剧", "美剧&欧剧"]
         }
 
-        self.resize(800,400)
 
         self.topWidget = QWidget()
         self.topLayout = QHBoxLayout()
@@ -78,7 +73,12 @@ class DyttSpiderUi(QMainWindow):
 
         self.status = self.statusBar()
         self.status.setStyleSheet("color:red;font-weight:bold")
-
+        screen_size = QDesktopWidget().screenGeometry()
+        window_size = self.geometry()
+        x = (screen_size.width() - window_size.width())/2
+        y = (screen_size.height() - window_size.height())/2
+        self.resize(window_size.width()+100, window_size.height())
+        self.move(x-50,y)
 
         self.centerLayout = QVBoxLayout()
         self.centerLayout.addWidget(self.topWidget)
@@ -87,6 +87,7 @@ class DyttSpiderUi(QMainWindow):
         self.centerWidget = QWidget()
         self.centerWidget.setLayout(self.centerLayout)
         self.setCentralWidget(self.centerWidget)
+        self.setWindowTitle("电影搜索")
 
     def change_origin(self,index):
         self.combox2.clear()
@@ -120,20 +121,23 @@ class DyttSpiderUi(QMainWindow):
         keyword = self.lineEdit.text()
         if keyword:
             t1 = threading.Thread(target=self.log_msg, args=("开始搜索请稍后...",))
-            t1.setDaemon(True)
             t1.start()
             t2 = threading.Thread(target=self.get_start,args=(keyword,))
             t2.start()
 
 
     def get_start(self):
+        #点击搜索按钮后
+        #若输入框是空的，则不作任何操作
+        #若不是空的，则首先改变状态信息
+        #接着开始发送请求
         keyword = self.lineEdit.text()
         origin = self.combox1.currentIndex()
         origin_type = self.originMap[origin]
         if keyword:
-            self.new_thread("开始搜索请稍后...")
             index = self.combox2.currentIndex()
             type_id = self.typeMap[origin_type].get(index)
+            self.new_thread("开始搜索请稍后...",)
             t = threading.Thread(target=self.start_request,args=(keyword,type_id,origin_type,self.callback))
             t.start()
 
@@ -147,10 +151,12 @@ class DyttSpiderUi(QMainWindow):
         t1.start()
 
     def log_msg(self,msg):
+        #改变状态信息
         self.label.setText(msg)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = DyttSpiderUi()
+    QMessageBox.information(window,"提示信息","本软件仅供学习交流使用，请勿做商业用途"+"\n"+"若有疑问或建议请联系作者邮箱："+"\n"+"jinfengxuancheng@163.com"+"\n"+"谢谢！")
     window.show()
     sys.exit(app.exec_())

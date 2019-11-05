@@ -1309,6 +1309,6 @@ h = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://ww
 <span class="hidden"><script src=/d/tj.js></script></span>"""
 
 html = etree.HTML(h)
-root_list = html.xpath("//div[@id='main']//table//td[1]/text()")
+root_list = html.xpath("//table//font[1]/a")
 print(root_list)
 
